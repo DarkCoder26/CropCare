@@ -782,7 +782,7 @@
         <main class="content-area">
             <!-- Dashboard Section -->
             <section id="dashboard" class="content-section active">
-                <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Welcome back, Ram Singh! 🙏</h2>
+                <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Welcome back, Satish Chaudhary! 🙏</h2>
                 
                 <div class="dashboard-grid">
                     <!-- Weather Card -->
@@ -848,7 +848,7 @@
                             <div class="chat-messages" id="dashboardChat">
                                 <div class="message bot">
                                     <div class="message-content">
-                                        Hello Ram Singh! How can I help you today? 🌾
+                                        Hello Satish Chaudhary! How can I help you today? 🌾
                                     </div>
                                 </div>
                             </div>
@@ -894,7 +894,7 @@
 
             <!-- AI Chat Section -->
             <section id="chat" class="content-section">
-                <h2 style="margin-bottom: 2rem; color: var(--primary-color);">AI Assistant - Krishi Mitra 🤖</h2>
+                <h2 style="margin-bottom: 2rem; color: var(--primary-color);">AI Assistant - CropCare 🤖</h2>
                 
                 <div class="card">
                     <div class="quick-actions">
@@ -910,7 +910,7 @@
                         <div class="chat-messages" id="mainChat">
                             <div class="message bot">
                                 <div class="message-content">
-                                    Namaste Ram Singh ji! 🙏 Main aapka AI assistant hun. Aap mujhse Hindi, Punjabi ya English mein baat kar sakte hain. Kya madad kar sakta hun aaj?
+                                    Namaste Satish Chaudhary ji! 🙏 Main aapka AI assistant hun. Aap mujhse Hindi, Punjabi ya English mein baat kar sakte hain. Kya madad kar sakta hun aaj?
                                 </div>
                             </div>
                         </div>
@@ -1307,13 +1307,13 @@
                         </div>
                         <div class="profile-info">
                             <div class="info-item">
-                                <strong>Name:</strong> Ram Singh
+                                <strong>Name:</strong> Satish Chaudhary
                             </div>
                             <div class="info-item">
-                                <strong>Location:</strong> Ludhiana, Punjab
+                                <strong>Location:</strong> Lalru, Punjab
                             </div>
                             <div class="info-item">
-                                <strong>Phone:</strong> +91 98765 43210
+                                <strong>Phone:</strong> +91 62XXX XXX62
                             </div>
                             <div class="info-item">
                                 <strong>Farm Size:</strong> 10 acres
@@ -1537,6 +1537,7 @@
 
         function quickChat(topic) {
             const questions = {
+                'Hello': 'Hello Satish Chaudhary',
                 'weather': 'What is the weather forecast for this week?',
                 'fertilizer': 'What fertilizer should I use for my wheat crop?',
                 'market': 'What are the current market prices for wheat?',
@@ -1573,8 +1574,10 @@
 
         function getBotResponse(input) {
             const lowerInput = input.toLowerCase();
-            
-            if (lowerInput.includes('weather') || lowerInput.includes('mausam')) {
+             if (lowerInput.includes('Hello') || lowerInput.includes('hello') || lowerInput.includes('HELLO')){
+                return "Hello Satish Chaudhary How can I assist today regarding your farmering.☺️";
+            }
+           else if (lowerInput.includes('weather') || lowerInput.includes('mausam')) {
                 return "This week's forecast: Mostly sunny with temperatures between 22-28°C. Light rain expected on Wednesday. Good conditions for wheat flowering stage. 🌤️";
             } else if (lowerInput.includes('fertilizer') || lowerInput.includes('khad')) {
                 return "For wheat at flowering stage, apply 40 kg Nitrogen per acre as Urea. Also consider Zinc supplementation if not applied earlier. Soil test recommended for precise recommendations. 🌾";
@@ -1753,6 +1756,7 @@
             setTimeout(() => {
                 alert("You have been logged out successfully. Redirecting to login page.");
                 // In a real app, this would redirect to login page
+                window.location.href="index.html";
             }, 1000);
         }
         
@@ -1762,6 +1766,7 @@
             setTimeout(() => {
                 alert("Your account has been deactivated. We're sorry to see you go!");
                 // In a real app, this would deactivate the account
+                window.location.href="index.html";
             }, 1500);
         }
 
@@ -1825,3 +1830,8 @@
     </script>
 </body>
 </html>
+
+
+
+
+
