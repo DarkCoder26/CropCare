@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropCare - Create Account</title>
+    <style>
+        /* Your existing CSS remains exactly the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(to bottom, #2E7D32, #4CAF50);
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 50px;
+            color: #2E7D32;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .app-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .app-subtitle {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .signup-benefits {
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .signup-benefits div {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .right-panel {
+            flex: 1.2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .language-btn:hover {
+            background: #e9ecef;
+        }
+        
+        .language-btn.active {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+        
+        .signup-form {
+            flex: 1;
+        }
+        
+        .form-title {
+            font-size: 26px;
+            margin-bottom: 30px;
+            color: #2E7D32;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .form-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .form-steps:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step.active {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .step-container {
+            display: none;
+        }
+        
+        .step-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper input, .input-wrapper select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .input-wrapper input:focus, .input-wrapper select:focus {
+            border-color: #4CAF50;
+            outline: none;
+            background: white;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.1);
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #777;
+            font-size: 18px;
+        }
+        
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .input-group {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group input {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+        
+        .checkbox-group label {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .checkbox-group a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-prev {
+            background: #f8f9fa;
+            color: #555;
+        }
+        
+        .btn-prev:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-next, .btn-submit {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            background: linear-gradient(45deg, #388E3C, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .chatbot-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            animation: bounce 3s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                transform: translate3d(0,-15px,0);
+            }
+            70% {
+                transform: translate3d(0,-7px,0);
+            }
+            90% {
+                transform: translate3d(0,-2px,0);
+            }
+        }
+        
+        .chatbot-trigger:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .chatbot-close {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .bot-message .message-content {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 20px 20px 20px 5px;
+            max-width: 80%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-message {
+            justify-content: flex-end;
+        }
+        
+        .user-message .message-content {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 20px 20px 5px 20px;
+            max-width: 80%;
+        }
+        
+        .quick-actions {
+            padding: 10px 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+        
+        .quick-btn {
+            background: #f1f3f4;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-btn:hover {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .chatbot-input button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chatbot-input button:hover {
+            background: #388E3C;
+            transform: scale(1.05);
+        }
+        
+        .voice-btn {
+            background: #ff9800 !important;
+            margin-right: 5px;
+        }
+        
+        .voice-btn:hover {
+            background: #f57c00 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                max-width: 95%;
+            }
+            
+            .left-panel {
+                padding: 30px;
+            }
+            
+            .app-title {
+                font-size: 24px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .chatbot-container {
+                width: 95%;
+                right: 2.5%;
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="app-logo">🌱</div>
+            <h1 class="app-title">Cropcare</h1>
+            <p class="app-subtitle">Smart Crop Advisory System for Farmers</p>
+            
+            <div class="signup-benefits">
+                <div><span class="benefit-icon">🤖</span> AI-Powered Crop Advisory</div>
+                <div><span class="benefit-icon">🌦️</span> Real-time Weather Updates</div>
+                <div><span class="benefit-icon">📸</span> Disease Detection via Images</div>
+                <div><span class="benefit-icon">💰</span> Government Schemes & Subsidies</div>
+                <div><span class="benefit-icon">🎤</span> Voice Commands & Responses</div>
+                <div><span class="benefit-icon">🌍</span> Multilingual Support</div>
+                <div><span class="benefit-icon">📊</span> Soil Analysis & Fertilizer Guide</div>
+                <div><span class="benefit-icon">📱</span> Offline Mode Available</div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="language-selector">
+                <button class="language-btn active" data-lang="en">English</button>
+                <button class="language-btn" data-lang="hi">हिंदी</button>
+                <button class="language-btn" data-lang="pa">ਪੰਜਾਬੀ</button>
+                <button class="language-btn" data-lang="gu">ગુજરાતી</button>
+            </div>
+            
+            <div class="signup-form">
+                <h2 class="form-title">Create Your Account</h2>
+                <p class="form-subtitle">Join thousands of farmers using CropCare</p>
+                
+                <div class="form-steps">
+                    <div class="step active">1</div>
+                    <div class="step">2</div>
+                    <div class="step">3</div>
+                </div>
+                
+                <!-- Step 1: Personal Information -->
+                <div class="step-container active" id="step1">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="firstName">First Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="firstName" placeholder="Enter your first name">
+                            </div>
+                            <div class="error-message" id="firstName-error"></div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="lastName">Last Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="lastName" placeholder="Enter your last name">
+                            </div>
+                            <div class="error-message" id="lastName-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" placeholder="Enter your email address">
+                        </div>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="mobile">Mobile Number</label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number">
+                        </div>
+                        <div class="error-message" id="mobile-error"></div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <div></div> <!-- Empty div for spacing -->
+                        <button class="btn btn-next" id="nextToStep2">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Account Details -->
+                <div class="step-container" id="step2">
+                    <div class="input-group">
+                        <label for="password">Create Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" placeholder="Create a strong password">
+                            <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+                        </div>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="confirmPassword" placeholder="Re-enter your password">
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword">👁️</button>
+                        </div>
+                        <div class="error-message" id="confirmPassword-error"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="state">State</label>
+                        <div class="input-wrapper">
+                            <select id="state">
+                                <option value="">Select your state</option>
+                                <option value="punjab">Punjab</option>
+                                <option value="haryana">Haryana</option>
+                                <option value="up">Uttar Pradesh</option>
+                                <option value="maharastra">Maharashtra</option>
+                                <option value="gujarat">Gujarat</option>
+                                <option value="rajasthan">Rajasthan</option>
+                                <option value="mp">Madhya Pradesh</option>
+                            </select>
+                        </div>
+                        <div class="error-message" id="state-error"></div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button class="btn btn-prev" id="prevToStep1">Previous</button>
+                        <button class="btn btn-next" id="nextToStep3">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Farm Information -->
+                <div class="step-container" id="step3">
+                    <div class="input-group">
+                        <label for="farmSize">Farm Size (in acres)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="farmSize" placeholder="Enter farm size in acres">
+                        </div>
+                        <div class="error-message" id="farmSize-error"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="crops">Main Crops Grown</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="crops" placeholder="e.g., Wheat, Rice, Cotton">
+                        </div>
+                        <div class="error-message" id="crops-error"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="soilType">Soil Type</label>
+                        <div class="input-wrapper">
+                            <select id="soilType">
+                                <option value="">Select soil type</option>
+                                <option value="loamy">Loamy</option>
+                                <option value="sandy">Sandy</option>
+                                <option value="clay">Clay</option>
+                                <option value="silt">Silt</option>
+                                <option value="peat">Peat</option>
+                                <option value="chalky">Chalky</option>
+                            </select>
+                        </div>
+                        <div class="error-message" id="soilType-error"></div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button class="btn btn-prev" id="prevToStep2">Previous</button>
+                        <button class="btn btn-submit" id="submitForm">Create Account</button>
+                    </div>
+                </div>
+                
+                <div class="login-link">
+                    <a href="index2.html">Login to your account</a><br>
+                    <small>Join thousands of farmers already using CropCare</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chatbot-trigger" title="Chat with Krishi Mitra">🤖</div>
+    
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            🌾 CropCare - Your AI Farming Assistant
+            <button class="chatbot-close">✕</button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Namaste! I'm CropCare Ai Assistance 🙏 How can I help you with farming today? You can ask me in Hindi, Punjabi, or English!
+                </div>
+            </div>
+        </div>
+        <div class="quick-actions">
+            <button class="quick-btn">Weather Info</button>
+            <button class="quick-btn">Crop Diseases</button>
+            <button class="quick-btn">Market Prices</button>
+            <button class="quick-btn">Govt Schemes</button>
+        </div>
+        <div class="chatbot-input">
+            <button class="voice-btn" title="Voice Input">🎤</button>
+            <input type="text" placeholder="Ask about crops, diseases, weather..." id="chatInput">
+            <button id="sendBtn">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // Form navigation functionality
+        const steps = document.querySelectorAll('.step');
+        const stepContainers = document.querySelectorAll('.step-container');
+        const nextToStep2 = document.getElementById('nextToStep2');
+        const nextToStep3 = document.getElementById('nextToStep3');
+        const prevToStep1 = document.getElementById('prevToStep1');
+        const prevToStep2 = document.getElementById('prevToStep2');
+        const submitForm = document.getElementById('submitForm');
+        
+        // Move to step 2
+        nextToStep2.addEventListener('click', () => {
+            // Validate step 1 fields
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            
+            let isValid = true;
+            
+            if (!firstName) {
+                document.getElementById('firstName-error').textContent = 'First name is required';
+                document.getElementById('firstName-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('firstName-error').style.display = 'none';
+            }
+            
+            if (!lastName) {
+                document.getElementById('lastName-error').textContent = 'Last name is required';
+                document.getElementById('lastName-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('lastName-error').style.display = 'none';
+            }
+            
+            if (!email || !validateEmail(email)) {
+                document.getElementById('email-error').textContent = 'Valid email is required';
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('email-error').style.display = 'none';
+            }
+            
+            if (!mobile || !validateMobile(mobile)) {
+                document.getElementById('mobile-error').textContent = 'Valid 10-digit mobile number is required';
+                document.getElementById('mobile-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('mobile-error').style.display = 'none';
+            }
+            
+            if (isValid) {
+                steps[0].classList.remove('active');
+                steps[1].classList.add('active');
+                stepContainers[0].classList.remove('active');
+                stepContainers[1].classList.add('active');
+            }
+        });
+        
+        // Move to step 3
+        nextToStep3.addEventListener('click', () => {
+            // Validate step 2 fields
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const state = document.getElementById('state').value;
+            
+            let isValid = true;
+            
+            if (!password || password.length < 6) {
+                document.getElementById('password-error').textContent = 'Password must be at least 6 characters';
+                document.getElementById('password-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('password-error').style.display = 'none';
+            }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPassword-error').textContent = 'Passwords do not match';
+                document.getElementById('confirmPassword-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('confirmPassword-error').style.display = 'none';
+            }
+            
+            if (!state) {
+                document.getElementById('state-error').textContent = 'Please select your state';
+                document.getElementById('state-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('state-error').style.display = 'none';
+            }
+            
+            if (isValid) {
+                steps[1].classList.remove('active');
+                steps[2].classList.add('active');
+                stepContainers[1].classList.remove('active');
+                stepContainers[2].classList.add('active');
+            }
+        });
+        
+        // Back to step 1
+        prevToStep1.addEventListener('click', () => {
+            steps[1].classList.remove('active');
+            steps[0].classList.add('active');
+            stepContainers[1].classList.remove('active');
+            stepContainers[0].classList.add('active');
+        });
+        
+        // Back to step 2
+        prevToStep2.addEventListener('click', () => {
+            steps[2].classList.remove('active');
+            steps[1].classList.add('active');
+            stepContainers[2].classList.remove('active');
+            stepContainers[1].classList.add('active');
+        });
+        
+        // Form submission
+        submitForm.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Validate step 3 fields
+            const farmSize = document.getElementById('farmSize').value;
+            const crops = document.getElementById('crops').value;
+            const soilType = document.getElementById('soilType').value;
+            const terms = document.getElementById('terms').checked;
+            
+            let isValid = true;
+            
+            if (!farmSize || farmSize <= 0) {
+                document.getElementById('farmSize-error').textContent = 'Please enter a valid farm size';
+                document.getElementById('farmSize-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('farmSize-error').style.display = 'none';
+            }
+            
+            if (!crops) {
+                document.getElementById('crops-error').textContent = 'Please enter your main crops';
+                document.getElementById('crops-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('crops-error').style.display = 'none';
+            }
+            
+            if (!soilType) {
+                document.getElementById('soilType-error').textContent = 'Please select your soil type';
+                document.getElementById('soilType-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('soilType-error').style.display = 'none';
+            }
+            
+            if (!terms) {
+                alert('Please agree to the Terms of Service and Privacy Policy');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show loading state
+                submitForm.innerHTML = '<span class="spinner"></span> Creating Account...';
+                submitForm.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to CropCare.');
+                    window.location.href = 'index2.html';
+                }, 2000);
+            }
+        });
+        
+        // Validation functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function validateMobile(mobile) {
+            const re = /^[6-9]\d{9}$/;
+            return re.test(mobile);
+        }
+        
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🔒';
+        });
+        
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🔒';
+        });
+        
+        // Language selector functionality with translations
+        const translations = {
+            en: {
+                title: "Create Your Account",
+                subtitle: "Join thousands of farmers using CropCare",
+                step1: "Personal Info",
+                step2: "Account Details",
+                step3: "Farm Info",
+                firstName: "First Name",
+                lastName: "Last Name",
+                email: "Email Address",
+                mobile: "Mobile Number",
+                password: "Create Password",
+                confirmPassword: "Confirm Password",
+                state: "State",
+                farmSize: "Farm Size (in acres)",
+                crops: "Main Crops Grown",
+                soilType: "Soil Type",
+                terms: "I agree to the Terms of Service and Privacy Policy",
+                next: "Next",
+                previous: "Previous",
+                submit: "Create Account",
+                loginText: "Login to your account",
+                joinText: "Join thousands of farmers already using CropCare"
+            },
+            hi: {
+                title: "अपना खाता बनाएं",
+                subtitle: "हजारों किसानों के साथ जुड़ें जो क्रॉपकेयर का उपयोग कर रहे हैं",
+                step1: "व्यक्तिगत जानकारी",
+                step2: "खाता विवरण",
+                step3: "खेत की जानकारी",
+                firstName: "पहला नाम",
+                lastName: "अंतिम नाम",
+                email: "ईमेल पता",
+                mobile: "मोबाइल नंबर",
+                password: "पासवर्ड बनाएं",
+                confirmPassword: "पासवर्ड की पुष्टि करें",
+                state: "राज्य",
+                farmSize: "खेत का आकार (एकड़ में)",
+                crops: "मुख्य उगाई जाने वाली फसलें",
+                soilType: "मिट्टी का प्रकार",
+                terms: "मैं सेवा की शर्तों और गोपनीयता नीति से सहमत हूं",
+                next: "आगे",
+                previous: "पिछला",
+                submit: "खाता बनाएं",
+                loginText: "अपने खाते में लॉगिन करें",
+                joinText: "हजारों किसान पहले से ही क्रॉपकेयर का उपयोग कर रहे हैं"
+            },
+            pa: {
+                title: "ਆਪਣਾ ਖਾਤਾ ਬਣਾਓ",
+                subtitle: "ਹਜ਼ਾਰਾਂ ਕਿਸਾਨਾਂ ਨਾਲ ਜੁੜੋ ਜੋ ਕ੍ਰਾਪਕੇਅਰ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹਨ",
+                step1: "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
+                step2: "ਖਾਤਾ ਵੇਰਵਾ",
+                step3: "ਖੇਤ ਦੀ ਜਾਣਕਾਰੀ",
+                firstName: "ਪਹਿਲਾ ਨਾਮ",
+                lastName: "ਆਖਰੀ ਨਾਮ",
+                email: "ਈਮੇਲ ਪਤਾ",
+                mobile: "ਮੋਬਾਈਲ ਨੰਬਰ",
+                password: "ਪਾਸਵਰਡ ਬਣਾਓ",
+                confirmPassword: "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ ਕਰੋ",
+                state: "ਰਾਜ",
+                farmSize: "ਖੇਤ ਦਾ ਆਕਾਰ (ਏਕੜ ਵਿੱਚ)",
+                crops: "ਮੁੱਖ ਉਗਾਈਆਂ ਜਾਣ ਵਾਲੀਆਂ ਫਸਲਾਂ",
+                soilType: "ਮਿੱਟੀ ਦੀ ਕਿਸਮ",
+                terms: "ਮੈਂ ਸੇਵਾ ਦੀਆਂ ਸ਼ਰਤਾਂ ਅਤੇ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਨਾਲ ਸਹਿਮਤ ਹਾਂ",
+                next: "ਅੱਗੇ",
+                previous: "ਪਿਛਲਾ",
+                submit: "ਖਾਤਾ ਬਣਾਓ",
+                loginText: "ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਲੌਗਇਨ ਕਰੋ",
+                joinText: "ਹਜ਼ਾਰਾਂ ਕਿਸਾਨ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਕ੍ਰਾਪਕੇਅਰ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹਨ"
+            },
+            gu: {
+                title: "તમારું એકાઉન્ટ બનાવો",
+                subtitle: "હજારો ખેડૂતો સાથે જોડાઓ જે ક્રોપકેરનો ઉપયોગ કરી રહ્યા છે",
+                step1: "વ્યક્તિગત માહિતી",
+                step2: "એકાઉન્ટ વિગતો",
+                step3: "ખેતરની માહિતી",
+                firstName: "પહેલું નામ",
+                lastName: "છેલ્લું નામ",
+                email: "ઈમેલ સરનામું",
+                mobile: "મોબાઇલ નંબર",
+                password: "પાસવર્ડ બનાવો",
+                confirmPassword: "પાસવર્ડની પુષ્ટિ કરો",
+                state: "રાજ્ય",
+                farmSize: "ખેતરનું કદ (એકરમાં)",
+                crops: "મુખ્ય વાવેતર કરાતી પાકો",
+                soilType: "માટીનો પ્રકાર",
+                terms: "હું સેવાની શરતો અને ગોપનીયતા નીતિથી સહમત છું",
+                next: "આગળ",
+                previous: "પાછળ",
+                submit: "એકાઉન્ટ બનાવો",
+                loginText: "તમારા એકાઉન્ટમાં લૉગિન કરો",
+                joinText: "હજારો ખેડૂતો પહેલેથી જ ક્રોપકેરનો ઉપયોગ કરી રહ્યા છે"
+            }
+        };
+        
+        const languageButtons = document.querySelectorAll('.language-btn');
+        languageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                languageButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const lang = button.getAttribute('data-lang');
+                updateLanguage(lang);
+            });
+        });
+        
+        // Auto-detect language based on browser settings
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('hi')) return 'hi';
+            if (browserLang.startsWith('pa')) return 'pa';
+            if (browserLang.startsWith('gu')) return 'gu';
+            return 'en';
+        }
+        
+        // Set initial language based on browser preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultLang = detectBrowserLanguage();
+            const defaultBtn = document.querySelector(`.language-btn[data-lang="${defaultLang}"]`);
+            if (defaultBtn) {
+                languageButtons.forEach(btn => btn.classList.remove('active'));
+                defaultBtn.classList.add('active');
+                updateLanguage(defaultLang);
+            }
+        });
+        
+        function updateLanguage(lang) {
+            const translation = translations[lang];
+            if (translation) {
+                document.querySelector('.form-title').textContent = translation.title;
+                document.querySelector('.form-subtitle').textContent = translation.subtitle;
+                document.querySelectorAll('.step-label')[0].textContent = translation.step1;
+                document.querySelectorAll('.step-label')[1].textContent = translation.step2;
+                document.querySelectorAll('.step-label')[2].textContent = translation.step3;
+                document.querySelector('label[for="firstName"]').textContent = translation.firstName;
+                document.querySelector('label[for="lastName"]').textContent = translation.lastName;
+                document.querySelector('label[for="email"]').textContent = translation.email;
+                document.querySelector('label[for="mobile"]').textContent = translation.mobile;
+                document.querySelector('label[for="password"]').textContent = translation.password;
+                document.querySelector('label[for="confirmPassword"]').textContent = translation.confirmPassword;
+                document.querySelector('label[for="state"]').textContent = translation.state;
+                document.querySelector('label[for="farmSize"]').textContent = translation.farmSize;
+                document.querySelector('label[for="crops"]').textContent = translation.crops;
+                document.querySelector('label[for="soilType"]').textContent = translation.soilType;
+                document.querySelector('.checkbox-group label').innerHTML = `${translation.terms} <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>`;
+                document.getElementById('nextToStep2').textContent = translation.next;
+                document.getElementById('nextToStep3').textContent = translation.next;
+                document.getElementById('prevToStep1').textContent = translation.previous;
+                document.getElementById('prevToStep2').textContent = translation.previous;
+                document.getElementById('submitForm').textContent = translation.submit;
+                document.querySelector('.login-link').innerHTML = `<a href="index2.html">${translation.loginText}</a><br><small>${translation.joinText}</small>`;
+            }
+        }
+        
+        // Enhanced chatbot functionality
+        const chatbotTrigger = document.querySelector('.chatbot-trigger');
+        const chatbotContainer = document.querySelector('.chatbot-container');
+        const chatbotClose = document.querySelector('.chatbot-close');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messagesContainer = document.querySelector('.chatbot-messages');
+        const quickButtons = document.querySelectorAll('.quick-btn');
+        const voiceBtn = document.querySelector('.voice-btn');
+        
+        chatbotTrigger.addEventListener('click', () => {
+            chatbotContainer.style.display = 'flex';
+        });
+        
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+        });
+        
+        // Enhanced chatbot responses
+        const responses = {
+            'weather': 'Today in your area: 25°C, partly cloudy. Good for irrigation! 🌤️',
+            'disease': 'Please upload a photo of affected crops. I can detect 50+ diseases! 📸',
+            'market': 'Current wheat price: ₹2,100/quintal. Prices trending up! 📈',
+            'scheme': 'PM-KISAN scheme: ₹6,000 annual. Check eligibility in profile! 💰',
+            'fertilizer': 'For wheat: Apply 120kg Urea + 60kg DAP per acre. Need soil test? 🧪',
+            'irrigation': 'Water crops every 7-10 days. Check soil moisture first! 💧',
+            'default': 'I can help with crops, weather, diseases, market prices, and government schemes. What would you like to know? 🌾'
+        };
+        
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function getBotResponse(input) {
+            const lowerInput = input.toLowerCase();
+            for (let key in responses) {
+                if (lowerInput.includes(key) || lowerInput.includes(key.replace('_', ' '))) {
+                    return responses[key];
+                }
+            }
+            return responses.default;
+        }
+        
+        sendBtn.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                setTimeout(() => {
+                    addMessage(getBotResponse(message));
+                }, 1000);
+                chatInput.value = '';
+            }
+        });
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+        
+        // Quick action buttons
+        quickButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.textContent.toLowerCase().replace(' ', '_');
+                addMessage(btn.textContent, true);
+                setTimeout(() => {
+                    addMessage(getBotResponse(action));
+                }, 1000);
+            });
+        });
+        
+        // Voice functionality (simulated)
+        voiceBtn.addEventListener('click', () => {
+            voiceBtn.style.background = '#f44336';
+            voiceBtn.innerHTML = '🔴';
+            setTimeout(() => {
+                voiceBtn.style.background = '#ff9800';
+                voiceBtn.innerHTML = '🎤';
+                addMessage('Voice input received! Processing...', true);
+                setTimeout(() => {
+                    addMessage('I heard: "What is the weather today?" 🎤\n\n' + responses.weather);
+                }, 1500);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
