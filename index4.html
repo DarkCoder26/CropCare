@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenFarm - Sustainable Farming Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary: #2E8B57;
+            --secondary: #FFD700;
+            --accent: #FF6B35;
+            --light: #F5F5F5;
+            --dark: #2C3E50;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #f44336;
+        }
+
+        body {
+            background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #4CAF50);
+            color: white;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-title {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 3px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .level-badge {
+            background: var(--accent);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            background: var(--light);
+            padding: 15px;
+            border-bottom: 2px solid var(--primary);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .dashboard-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .dashboard-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .dashboard-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        .nav {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: var(--primary);
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: white;
+            padding: 12px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-item.active {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .content {
+            padding: 20px;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Dashboard Section */
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .progress-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            background: #E0E0E0;
+            height: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: linear-gradient(90deg, var(--accent), var(--warning));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .mission-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .mission-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .mission-desc {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, var(--primary), #4CAF50);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+        }
+
+        .start-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Mission Section */
+        .mission-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .mission-instruction {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .soil-patches {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+            background: #8BC34A;
+            padding: 20px;
+            border-radius: 15px;
+            border: 4px solid #795548;
+        }
+
+        .soil-patch {
+            aspect-ratio: 1;
+            background: #A1887F;
+            border: 2px solid #5D4037;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .soil-patch.mulched {
+            background: #5D4037;
+        }
+
+        .soil-patch:hover {
+            transform: scale(1.05);
+        }
+
+        .mulch-item {
+            background: #5D4037;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            width: 150px;
+            cursor: grab;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .location-selector {
+            background: var(--light);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #F8F9FA;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            background: #E8F5E8;
+        }
+
+        .leaderboard-item.current-user {
+            background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
+            border: 2px solid var(--primary);
+        }
+
+        .rank {
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .rank-1 { background: #FFD700; color: var(--dark); }
+        .rank-2 { background: #C0C0C0; }
+        .rank-3 { background: #CD7F32; }
+
+        .player-score {
+            margin-left: auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Rewards Section */
+        .rewards-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .coins-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .coins-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+
+        .coins-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .reward-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .reward-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .reward-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .reward-desc {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .redeem-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .redeem-btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #FFF3E0, #FFECB3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border: 2px dashed var(--warning);
+        }
+
+        .certificate-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .certificate-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.05);}
+            100% {transform: scale(1);}
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .soil-patches {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .rewards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .profile {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="game-title">
+                <h1>GreenFarm</h1>
+                <p>Sustainable Farming Game</p>
+            </div>
+            <div class="profile">
+                <div class="avatar">👨‍🌾</div>
+                <div>
+                    <h3 id="playerName">Satish Chaudhary</h3>
+                    <div class="level-badge">Level <span id="playerLevel">5</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <div class="dashboard-item">
+                <div class="dashboard-value" id="dashboardCoins">120</div>
+                <div class="dashboard-label">GreenCoins</div>
+            </div>
+            <div class="dashboard-item">
+                <div class="dashboard-value" id="dashboardXP">75</div>
+                <div class="dashboard-label">Sustainability Score</div>
+            </div>
+            <div class="dashboard-item">
+                <div class="dashboard-value" id="dashboardMissions">3</div>
+                <div class="dashboard-label">Completed Missions</div>
+            </div>
+            <div class="dashboard-item">
+                <div class="dashboard-value" id="dashboardStreak">7</div>
+                <div class="dashboard-label">Day Streak</div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <div class="nav-item active" onclick="showSection('dashboard')">📊 Dashboard</div>
+            <div class="nav-item" onclick="showSection('mission')">🎯 Mission</div>
+            <div class="nav-item" onclick="showSection('leaderboard')">🏆 Leaderboard</div>
+            <div class="nav-item" onclick="showSection('rewards')">🎁 Rewards</div>
+            <div class="nav-item" onclick="showSection('farm')">🌾 Farm</div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="content active" id="dashboard">
+            <div class="dashboard-content">
+                <div>
+                    <div class="progress-card">
+                        <h3 class="progress-title">Progress</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <p>65% of weekly goals completed</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3 class="mission-title">Today's Mission</h3>
+                        <p class="mission-desc">Add organic compost for 7 days</p>
+                        <button class="start-btn" onclick="showSection('mission')">Start Mission</button>
+                    </div>
+                </div>
+                
+                <div class="score-card">
+                    <h3>Sustainability Score</h3>
+                    <div class="score-value">75</div>
+                    <p class="score-label">Good job! Keep it up!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="content" id="mission">
+            <h2 class="section-title">🌱 Today's Mission</h2>
+            
+            <div class="mission-container">
+                <h3>Add Organic Compost</h3>
+                <p class="mission-instruction">Drag the mulch onto the soil patches</p>
+                
+                <div class="mulch-item" id="mulchItem" draggable="true" ondragstart="dragStart(event)">
+                    🍂 Organic Mulch
+                </div>
+                
+                <div class="soil-patches" id="soilPatches">
+                    <!-- Soil patches will be generated by JavaScript -->
+                </div>
+                
+                <button class="submit-btn" onclick="submitMission()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="content" id="leaderboard">
+            <h2 class="section-title">🏆 Leaderboard</h2>
+            
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h3>Panchayat District Rankings</h3>
+                    <select class="location-selector" id="locationSelector">
+                        <option>Panchayat District</option>
+                        <option>State Level</option>
+                        <option>National Level</option>
+                    </select>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank rank-1">1</div>
+                    <div>
+                        <h4>Pat RT</h4>
+                        <p>Panchayat District</p>
+                    </div>
+                    <div class="player-score">350</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank rank-2">2</div>
+                    <div>
+                        <h4>Kiran Kumar</h4>
+                        <p>Panchayat District</p>
+                    </div>
+                    <div class="player-score">320</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank rank-3">3</div>
+                    <div>
+                        <h4>Raju Singh</h4>
+                        <p>Panchayat District</p>
+                    </div>
+                    <div class="player-score">310</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank">4</div>
+                    <div>
+                        <h4>Sita Devi</h4>
+                        <p>Panchayat District</p>
+                    </div>
+                    <div class="player-score">295</div>
+                </div>
+                
+                <div class="leaderboard-item current-user">
+                    <div class="rank">5</div>
+                    <div>
+                        <h4>Satish Chaudhary (You)</h4>
+                        <p>Panchayat District</p>
+                    </div>
+                    <div class="player-score">280</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rewards Section -->
+        <div class="content" id="rewards">
+            <h2 class="section-title">🎁 Your Rewards</h2>
+            
+            <div class="rewards-container">
+                <div class="coins-display">
+                    <div class="coins-value">120</div>
+                    <div class="coins-label">GreenCoins</div>
+                    <p>Redeem for sustainable farming benefits</p>
+                </div>
+                
+                <h3>Available Rewards</h3>
+                <div class="rewards-grid">
+                    <div class="reward-card">
+                        <div class="reward-icon">📚</div>
+                        <h4 class="reward-title">Training Credit</h4>
+                        <p class="reward-desc">Access to sustainable farming courses</p>
+                        <button class="redeem-btn" onclick="redeemReward('training')">Redeem (50 coins)</button>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-icon">💰</div>
+                        <h4 class="reward-title">$50 Off</h4>
+                        <p class="reward-desc">Discount on organic farming inputs</p>
+                        <button class="redeem-btn" onclick="redeemReward('discount')">Redeem (80 coins)</button>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-icon">🌿</div>
+                        <h4 class="reward-title">Organic Inputs</h4>
+                        <p class="reward-desc">Natural fertilizers and pesticides</p>
+                        <button class="redeem-btn" onclick="redeemReward('inputs')">Redeem (100 coins)</button>
+                    </div>
+                </div>
+                
+                <div class="certificate">
+                    <div class="certificate-icon">🏆</div>
+                    <h3 class="certificate-title">Certificate of Recognition</h3>
+                    <p>Awarded for sustainable farming practices</p>
+                    <button class="redeem-btn" style="margin-top: 15px;" onclick="downloadCertificate()">Download Certificate</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farm Section -->
+        <div class="content" id="farm">
+            <h2 class="section-title">🌾 Your Sustainable Farm</h2>
+            
+            <div class="dashboard-content">
+                <div>
+                    <div class="mission-card">
+                        <h3 class="mission-title">Crop Rotation Practice</h3>
+                        <p class="mission-desc">Rotate your crops to maintain soil health</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%"></div>
+                        </div>
+                        <p>2/5 crops rotated this season</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3 class="mission-title">Water Conservation</h3>
+                        <p class="mission-desc">Use drip irrigation to save water</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <p>15% water saved this month</p>
+                    </div>
+                </div>
+                
+                <div class="score-card">
+                    <h3>Eco-Farming Score</h3>
+                    <div class="score-value">82</div>
+                    <p class="score-label">Excellent sustainable practices!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            coins: 120,
+            sustainabilityScore: 75,
+            completedMissions: 3,
+            dayStreak: 7,
+            level: 5,
+            currentMission: {
+                type: "mulch",
+                completed: false,
+                patchesMulched: 0,
+                totalPatches: 5
+            }
+        };
+
+        // Initialize the game
+        function initGame() {
+            updateDashboard();
+            createSoilPatches();
+            setupDragAndDrop();
+        }
+
+        // Create soil patches for the mission
+        function createSoilPatches() {
+            const soilPatches = document.getElementById('soilPatches');
+            soilPatches.innerHTML = '';
+            
+            for (let i = 0; i < gameState.currentMission.totalPatches; i++) {
+                const patch = document.createElement('div');
+                patch.className = 'soil-patch';
+                patch.innerHTML = '🟫';
+                patch.id = `patch-${i}`;
+                patch.ondragover = allowDrop;
+                patch.ondrop = dropMulch;
+                soilPatches.appendChild(patch);
+            }
+        }
+
+        // Drag and drop functionality
+        function dragStart(event) {
+            event.dataTransfer.setData("text/plain", "mulch");
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function dropMulch(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData("text/plain");
+            
+            if (data === "mulch") {
+                event.target.classList.add('mulched');
+                event.target.innerHTML = '🟫🍂';
+                gameState.currentMission.patchesMulched++;
+                
+                // Check if mission is completed
+                if (gameState.currentMission.patchesMulched >= gameState.currentMission.totalPatches) {
+                    document.querySelector('.submit-btn').classList.add('pulse');
+                }
+            }
+        }
+
+        // Setup drag and drop
+        function setupDragAndDrop() {
+            const mulchItem = document.getElementById('mulchItem');
+            mulchItem.ondragstart = dragStart;
+            
+            const patches = document.querySelectorAll('.soil-patch');
+            patches.forEach(patch => {
+                patch.ondragover = allowDrop;
+                patch.ondrop = dropMulch;
+            });
+        }
+
+        // Submit mission
+        function submitMission() {
+            if (gameState.currentMission.patchesMulched >= gameState.currentMission.totalPatches) {
+                // Mission completed
+                gameState.coins += 25;
+                gameState.sustainabilityScore += 5;
+                gameState.completedMissions++;
+                gameState.dayStreak++;
+                
+                updateDashboard();
+                
+                alert('Mission completed! You earned 25 GreenCoins and increased your sustainability score!');
+                showSection('dashboard');
+            } else {
+                alert(`Please mulch all ${gameState.currentMission.totalPatches} soil patches to complete the mission.`);
+            }
+        }
+
+        // Redeem rewards
+        function redeemReward(rewardType) {
+            const costs = {
+                'training': 50,
+                'discount': 80,
+                'inputs': 100
+            };
+            
+            const cost = costs[rewardType];
+            
+            if (gameState.coins >= cost) {
+                gameState.coins -= cost;
+                updateDashboard();
+                
+                const rewards = {
+                    'training': 'Training Credit',
+                    'discount': '$50 Off Voucher',
+                    'inputs': 'Organic Inputs Pack'
+                };
+                
+                alert(`You successfully redeemed ${rewards[rewardType]}!`);
+            } else {
+                alert(`You need ${cost - gameState.coins} more GreenCoins to redeem this reward.`);
+            }
+        }
+
+        // Download certificate
+        function downloadCertificate() {
+            alert('Certificate downloaded! Thank you for your sustainable farming practices.');
+        }
+
+        // Update dashboard display
+        function updateDashboard() {
+            document.getElementById('dashboardCoins').textContent = gameState.coins;
+            document.getElementById('dashboardXP').textContent = gameState.sustainabilityScore;
+            document.getElementById('dashboardMissions').textContent = gameState.completedMissions;
+            document.getElementById('dashboardStreak').textContent = gameState.dayStreak;
+            document.getElementById('playerLevel').textContent = gameState.level;
+        }
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+            
+            // Reset mission if showing mission section
+            if (sectionId === 'mission') {
+                resetMission();
+            }
+        }
+
+        // Reset mission
+        function resetMission() {
+            gameState.currentMission.patchesMulched = 0;
+            createSoilPatches();
+            setupDragAndDrop();
+            document.querySelector('.submit-btn').classList.remove('pulse');
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
