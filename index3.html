@@ -85,8 +85,8 @@
         }
 
         .language-switcher select {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(24, 238, 120, 0.2);
+            color: rgb(20, 20, 20);
             border: none;
             padding: 8px 12px;
             border-radius: 20px;
@@ -99,7 +99,7 @@
         }
 
         .language-switcher select:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(10, 10, 10, 0.3);
         }
 
         .language-switcher::after {
@@ -115,7 +115,7 @@
         /* Game Button */
         .game-btn {
             background: var(--warning-color);
-            color: white;
+            color: rgb(19, 18, 18);
             border: none;
             padding: 10px 20px;
             border-radius: 20px;
@@ -131,6 +131,143 @@
         .game-btn:hover {
             background: #e68900;
             transform: translateY(-2px);
+        }
+
+        /* NEW PROFILE SECTION STYLES */
+        .profile-section {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 1.5rem;
+            margin-top: 10px;
+            z-index: 1001;
+            display: none;
+            color: var(--dark-text);
+        }
+
+        .profile-dropdown.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .profile-email {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .profile-details {
+            margin-bottom: 1rem;
+        }
+
+        .profile-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-detail:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .detail-value {
+            font-weight: 600;
+        }
+
+        .crop-info {
+            background: var(--light-bg);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .crop-item-small {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .crop-item-small:last-child {
+            margin-bottom: 0;
+        }
+
+        .logout-btn {
+            width: 100%;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
         }
 
         /* All other CSS styles remain exactly the same */
@@ -487,6 +624,11 @@
             .language-switcher select {
                 min-width: 120px;
             }
+
+            .profile-dropdown {
+                width: 280px;
+                right: -10px;
+            }
         }
 
         /* Hide mobile menu button on desktop */
@@ -736,7 +878,7 @@
             </div>
             <div class="user-info">
                 <div class="weather-widget" id="headerWeather">
-                    <span id="location-text">📍 Punjab</span> • <span id="temp-text">24°C</span> <span
+                    <span id="location-text">📍 Kerala</span> • <span id="temp-text">24°C</span> <span
                         id="weather-icon">☀️</span>
                 </div>
                 <button class="game-btn" onclick="redirectToGame()">
@@ -755,6 +897,57 @@
                         <option value="kn">ಕನ್ನಡ</option>
                         <option value="ml">മലയാളം</option>
                     </select>
+                </div>
+                
+                <!-- NEW PROFILE SECTION -->
+                <div class="profile-section">
+                    <button class="profile-btn" onclick="toggleProfileDropdown()">
+                        👤 Satish Chaudhary
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="profile-header">
+                            <div class="profile-avatar">SC</div>
+                            <div>
+                                <div class="profile-name">Satish Chaudhary</div>
+                                <div class="profile-email">satish.chaudhary@example.com</div>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-detail">
+                                <span class="detail-label">Phone:</span>
+                                <span class="detail-value">+91 98765 43210</span>
+                            </div>
+                            <div class="profile-detail">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">Ludhiana, Punjab</span>
+                            </div>
+                            <div class="profile-detail">
+                                <span class="detail-label">Farm Size:</span>
+                                <span class="detail-value">10 acres</span>
+                            </div>
+                            <div class="profile-detail">
+                                <span class="detail-label">Member Since:</span>
+                                <span class="detail-value">Jan 2023</span>
+                            </div>
+                        </div>
+                        <div class="crop-info">
+                            <div style="font-weight: bold; margin-bottom: 8px;">Current Crops</div>
+                            <div class="crop-item-small">
+                                <span>Wheat</span>
+                                <span>5 acres</span>
+                            </div>
+                            <div class="crop-item-small">
+                                <span>Rice</span>
+                                <span>3 acres</span>
+                            </div>
+                            <div class="crop-item-small">
+                                <span>Cotton</span>
+                                <span>2 acres</span>
+                            </div>
+                        </div>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                         
+                    </div>
                 </div>
             </div>
         </div>
@@ -1139,6 +1332,39 @@
     </div>
 
     <script>
+        // NEW PROFILE FUNCTIONS
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('active');
+            
+            // Close dropdown when clicking outside
+            if (dropdown.classList.contains('active')) {
+                document.addEventListener('click', closeProfileDropdownOnClickOutside);
+            } else {
+                document.removeEventListener('click', closeProfileDropdownOnClickOutside);
+            }
+        }
+
+        function closeProfileDropdownOnClickOutside(event) {
+            const dropdown = document.getElementById('profileDropdown');
+            const profileBtn = document.querySelector('.profile-btn');
+            
+            if (!dropdown.contains(event.target) && !profileBtn.contains(event.target)) {
+                dropdown.classList.remove('active');
+                document.removeEventListener('click', closeProfileDropdownOnClickOutside);
+            }
+        }
+
+        function logout() {
+            showNotification("Logging out...");
+            setTimeout(() => {
+                // In a real app, this would redirect to login page
+                showNotification("You have been logged out successfully.");
+                document.getElementById('profileDropdown').classList.remove('active');
+                window.location.href="index.html"
+            }, 1500);
+        }
+
         // Language translations - Expanded with 10 languages
         const translations = {
             en: {
@@ -1259,7 +1485,7 @@
                 "logo-text": "ਕ੍ਰਾਪਕੇਅਰ",
                 "nav-crops": "ਫਸਲ ਸਲਾਹ ਅਤੇ ਰੋਗ ਸਕੈਨਰ",
                 "dashboard-title": "ਸਤੀਸ਼ ਚੌਧਰੀ, ਵਾਪਸੀ 'ਤੇ ਸਵਾਗਤ ਹੈ! 🙏",
-                "ai-welcome": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ ਸਤੀਸ਼ ਚੌਧਰੀ ਜੀ! 🙏 ਮੈਂ ਤੁਹਾਡਾ AI ਸਹਾਇਕ ਹਾਂ। ਤੁਸੀਂ ਮੇਰੇ ਨਾਲ ਹਿੰਦੀ, ਪੰਜਾਬੀ ਜਾਂ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਗੱਲ ਕਰ ਸਕਦੇ ਹੋ। ਅੱਜ ਮੈਂ ਤੁਹਾਡੀ ਕਿਵੇਂ ਮਦਦ ਕਰ ਸਕਦਾ ਹਾਂ?"
+                "ai-welcome": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ ਸਤੀਸ਼ ਚੌਧਰੀ ਜी! 🙏 ਮੈਂ ਤੁਹਾਡਾ AI ਸਹਾਇਕ ਹਾਂ। ਤੁਸੀਂ ਮੇਰੇ ਨਾਲ ਹਿੰਦੀ, ਪੰਜਾਬੀ ਜਾਂ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਗੱਲ ਕਰ ਸਕਦੇ ਹੋ। ਅੱਜ ਮੈਂ ਤੁਹਾਡੀ ਕਿਵੇਂ ਮਦਦ ਕਰ ਸਕਦਾ ਹਾਂ?"
             },
             te: {
                 "logo-text": "క్రాప్ కేర్",
